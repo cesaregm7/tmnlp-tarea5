@@ -8,10 +8,10 @@ from src.features.dictionary import create_dictionary
 from src.data.prepare_data import read_sample, create_classes
 from src.features.tokenize import tokenize_classes
 
-
+#Configurando logs
 logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
 
-
+#Metodo para realizar el entrenamiento
 def train():
     df = read_sample()
     logging.info('Source data file read succesfully')

@@ -26,20 +26,19 @@ def clean_data(data : List[str]) -> List:
     
     return datos
 
+#Metodo para transformar oraciones a palabras
 def sentences_to_words(sentences: List[str]) -> Generator:
     for sentence in sentences:
-        # https://radimrehurek.com/gensim/utils.html#gensim.utils.simple_preprocess
         yield(simple_preprocess(str(sentence), deacc=True))  # deacc=True elimina la puntuación
 
-
+#Metodo para eliminar stopwords
 def remove_stopwords(documents: List[List[str]]) -> List[List[str]]:
     return [[word for word in simple_preprocess(str(doc)) if word not in stopwords.words('english')]
             for doc in documents]
 
-
+#Metodo para crear un modelo de bigrams
 def bigrams_model(documents: List[List[str]], save: bool = False) -> Phraser:
     # We learn bigrams
-    #  https://radimrehurek.com/gensim/models/phrases.html#gensim.models.phrases.Phrases
     bigram = Phrases(documents, min_count=5, threshold=10)
 
     # we reduce the bigram model to its minimal functionality
@@ -51,12 +50,12 @@ def bigrams_model(documents: List[List[str]], save: bool = False) -> Phraser:
 
     return bigram_mod
 
-
+#Metodo para aplicar el modelo de bigrams a nuestros documentos
 def extend_bigrams(documents: List[List[str]], bigram_mod: Phraser) -> List[List[str]]:
     # we apply the bigram model to our documents
     return [bigram_mod[doc] for doc in documents]
 
-
+#Metodo para realizar lematizacion
 def lemmatization(nlp: English, texts: List[List[str]], allowed_postags: List = None) -> List[List[str]]:
     if allowed_postags is None:
         allowed_postags = ['NOUN', 'ADJ', 'VERB', 'ADV']

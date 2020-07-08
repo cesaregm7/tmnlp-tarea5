@@ -5,7 +5,7 @@ from src.features import nlp
 from src.features.utils import (sentences_to_words, remove_stopwords,
                                 bigrams_model, extend_bigrams, lemmatization,clean_data)
 
-
+#Metodo para realizar tokenizacion
 def tokenize_classes(document_classes: Dict[str, List[str]], load_bigrams: bool = True) -> Dict[str, List[List[str]]]:
 
     word_classes = {}

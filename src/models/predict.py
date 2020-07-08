@@ -3,7 +3,7 @@ from typing import List
 import os
 from src.features.tokenize import tokenize_classes
 
-
+#Metodo para predecir el sentimiento de una frase
 def predict(documents: List[str]):
     document_classes = {
         'UNK': documents
@@ -19,6 +19,8 @@ def predict(documents: List[str]):
 
     predictions = []
     for document in document_words:
+
+        #Calculando las probabilidades de pertenecer a cada clase
         positive_prob = model['POS_PROB']
         negative_prob = model['NEG_PROB']
         for word in document:
@@ -32,6 +34,7 @@ def predict(documents: List[str]):
             else:
                 negative_prob += model['COND_NEG_PROBS'][-1]['logprob']
 
+        #Determinando a que clase pertenece la oracion
         if positive_prob >= negative_prob:
             predictions.append('POS')
         else:

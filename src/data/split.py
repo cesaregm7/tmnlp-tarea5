@@ -2,6 +2,7 @@ import random
 from typing import List, Dict, Tuple
 import math
 
+#Metodo para dividir los datos en entrenamiento, prueba y validacion
 def split_data(data: List[str], weights: Tuple = (0.8, 0.2, 0.0), seed: int = 100) -> Dict:
     split = {}
     random.seed(seed)
