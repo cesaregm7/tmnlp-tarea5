@@ -40,8 +40,8 @@ def train():
     total_negative = len(negative_split['train']) + len(negative_bow)
     total_positive = len(positive_split['train']) + len(positive_bow)
 
-    negative_prob = len(negative_split['train']) / (len(negative_split['train']) + len(positive_split['train']))
-    positive_prob = len(positive_split['train']) / (len(negative_split['train']) + len(positive_split['train']))
+    negative_prob = np.log(len(negative_split['train']) / (len(negative_split['train']) + len(positive_split['train'])))
+    positive_prob = np.log(len(positive_split['train']) / (len(negative_split['train']) + len(positive_split['train'])))
 
     negative_word_probs = {}
     for id, count in negative_bow:
